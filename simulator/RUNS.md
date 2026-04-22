@@ -98,3 +98,9 @@ runroot python scripts/build_exe.py --name Simulator
 # onefile build (harder to get right):
 runroot python scripts/build_exe.py --name Simulator --onefile
 ```
+
+## 4) RipGrep
+
+rg "graph_host" simulator
+
+rg "main.py" simulator
