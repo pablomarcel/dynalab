@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="/simulator">
+    <file>theme/dark.qss</file>
+    <file>theme/light.qss</file>
+
+    <file>theme/icons/add.svg</file>
+    <file>theme/icons/run.svg</file>
+    <file>theme/icons/save.svg</file>
+    <file>theme/icons/bode.svg</file>
+    <file>theme/icons/step.svg</file>
+  </qresource>
+</RCC>

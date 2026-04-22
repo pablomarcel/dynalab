@@ -1,0 +1,120 @@
+/* simulator.ui.theme.dark.qss
+   Simple dark theme (MVP).  Keep it lightweight and readable.
+
+   Tip: QSS is not CSS — supported properties are Qt-specific.
+*/
+
+QWidget {
+  background: #1E1E1E;
+  color: #E6E6E6;
+  font-size: 12px;
+}
+
+QMainWindow::separator {
+  background: #2A2A2A;
+  width: 1px;
+  height: 1px;
+}
+
+QMenuBar {
+  background: #1E1E1E;
+  color: #E6E6E6;
+}
+
+QMenuBar::item {
+  padding: 4px 10px;
+  background: transparent;
+}
+
+QMenuBar::item:selected {
+  background: #2B2B2B;
+}
+
+QMenu {
+  background: #232323;
+  border: 1px solid #3A3A3A;
+}
+
+QMenu::item {
+  padding: 6px 20px;
+}
+
+QMenu::item:selected {
+  background: #2E2E2E;
+}
+
+QToolBar {
+  background: #1E1E1E;
+  border-bottom: 1px solid #2B2B2B;
+  spacing: 6px;
+}
+
+QDockWidget {
+  titlebar-close-icon: none;
+  titlebar-normal-icon: none;
+  border: 1px solid #2B2B2B;
+}
+
+QDockWidget::title {
+  background: #232323;
+  padding: 6px;
+}
+
+QStatusBar {
+  background: #1E1E1E;
+  border-top: 1px solid #2B2B2B;
+}
+
+QLineEdit, QPlainTextEdit, QTextEdit {
+  background: #232323;
+  border: 1px solid #3A3A3A;
+  padding: 4px;
+  selection-background-color: #3A3A3A;
+}
+
+QComboBox {
+  background: #232323;
+  border: 1px solid #3A3A3A;
+  padding: 4px;
+}
+
+QPushButton {
+  background: #2B2B2B;
+  border: 1px solid #3A3A3A;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+QPushButton:hover {
+  background: #323232;
+}
+
+QPushButton:pressed {
+  background: #2A2A2A;
+}
+
+QTabWidget::pane {
+  border: 1px solid #2B2B2B;
+}
+
+QTabBar::tab {
+  background: #232323;
+  border: 1px solid #2B2B2B;
+  padding: 6px 10px;
+  margin-right: 2px;
+}
+
+QTabBar::tab:selected {
+  background: #2B2B2B;
+}
+
+QTreeWidget, QListWidget, QTableWidget {
+  background: #232323;
+  border: 1px solid #2B2B2B;
+}
+
+QHeaderView::section {
+  background: #2B2B2B;
+  border: 1px solid #2B2B2B;
+  padding: 4px;
+}
