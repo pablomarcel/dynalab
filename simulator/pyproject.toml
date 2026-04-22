@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "machines-simulator"
+version = "0.1.0"
+description = "PySide6 desktop block-diagram control/simulation app (Simulink-style) for the machines project"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Pablo Marcel Montijo" }]
+
+dependencies = [
+  "PySide6>=6.6",
+  # Node-graph UI framework. (NodeGraphQt is PySide2; OdenGraphQt is a PySide6 fork.)
+  "OdenGraphQt",
+  # LTI analysis + interconnections (transfer functions, feedback, bode/step, etc.)
+  "control",
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "sympy",
+]
+
+[project.optional-dependencies]
+sim = [
+  # Optional simulation engines you can compile to later.
+  "pathsim",
+  "bdsim",
+]
+dev = [
+  "pytest",
+  "ruff",
+  "black",
+  "mypy",
+  "pre-commit",
+]
+
+[project.scripts]
+simulator = "simulator.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["simulator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+line-length = 100
