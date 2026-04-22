@@ -1,0 +1,190 @@
+{
+  "format": "simproj",
+  "format_version": 1,
+  "model_ir": {
+    "meta": {
+      "version": 1,
+      "title": "Demo \u2014 Unity Feedback",
+      "domain": "continuous",
+      "Ts": null
+    },
+    "blocks": [
+      {
+        "id": "r",
+        "type": "step",
+        "name": "Step",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "amplitude": 1.0,
+          "t0": 0.0
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "r.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "sum1",
+        "type": "sum",
+        "name": "Sum",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "n_inputs": 2,
+          "signs": [
+            1,
+            -1
+          ]
+        },
+        "inputs": [
+          {
+            "id": "sum1.a",
+            "name": "a",
+            "direction": "in",
+            "dim": 1,
+            "sign": 1
+          },
+          {
+            "id": "sum1.b",
+            "name": "b",
+            "direction": "in",
+            "dim": 1,
+            "sign": -1
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sum1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "G",
+        "type": "tf",
+        "name": "G(s)",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "num": [
+            1.0
+          ],
+          "den": [
+            1.0,
+            1.0
+          ]
+        },
+        "inputs": [
+          {
+            "id": "G.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "G.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "H",
+        "type": "gain",
+        "name": "H",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "k": 1.0
+        },
+        "inputs": [
+          {
+            "id": "H.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "H.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "scope1",
+        "type": "scope",
+        "name": "Scope",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "label": "y"
+        },
+        "inputs": [
+          {
+            "id": "scope1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": []
+      }
+    ],
+    "wires": [
+      {
+        "id": "w0",
+        "src": "r.y",
+        "dst": "sum1.a"
+      },
+      {
+        "id": "w1",
+        "src": "sum1.y",
+        "dst": "G.u"
+      },
+      {
+        "id": "w2",
+        "src": "G.y",
+        "dst": "scope1.u"
+      },
+      {
+        "id": "w3",
+        "src": "G.y",
+        "dst": "H.u"
+      },
+      {
+        "id": "w4",
+        "src": "H.y",
+        "dst": "sum1.b"
+      }
+    ],
+    "io_inputs": [
+      "r.y"
+    ],
+    "io_outputs": [
+      "G.y"
+    ]
+  },
+  "ui_session": {}
+}

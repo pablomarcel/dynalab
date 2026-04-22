@@ -1,0 +1,489 @@
+{
+  "format": "simproj",
+  "format_version": 1,
+  "model_ir": {
+    "meta": {
+      "name": "Untitled",
+      "version": 1,
+      "domain": "continuous",
+      "Ts": null
+    },
+    "blocks": [
+      {
+        "id": "gain_flipped1",
+        "type": "gain_flipped",
+        "name": "K",
+        "domain": null,
+        "Ts": null,
+        "inputs": [
+          {
+            "id": "gain_flipped1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "outputs": [
+          {
+            "id": "gain_flipped1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "params": {
+          "k": 2.0
+        }
+      },
+      {
+        "id": "scope1",
+        "type": "scope",
+        "name": "scope",
+        "domain": null,
+        "Ts": null,
+        "inputs": [
+          {
+            "id": "scope1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "label": ""
+        }
+      },
+      {
+        "id": "step1",
+        "type": "step",
+        "name": "step",
+        "domain": null,
+        "Ts": null,
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "step1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "params": {
+          "amplitude": 1.0,
+          "t0": 0.0
+        }
+      },
+      {
+        "id": "sum_glyph1",
+        "type": "sum_glyph",
+        "name": "\u03a3",
+        "domain": null,
+        "Ts": null,
+        "inputs": [
+          {
+            "id": "sum_glyph1.a",
+            "name": "a",
+            "direction": "in",
+            "dim": 1,
+            "sign": 1,
+            "tags": {}
+          },
+          {
+            "id": "sum_glyph1.b",
+            "name": "b",
+            "direction": "in",
+            "dim": 1,
+            "sign": -1,
+            "tags": {}
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sum_glyph1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "params": {
+          "n_inputs": 2,
+          "signs": [
+            1,
+            -1
+          ]
+        }
+      },
+      {
+        "id": "tf1",
+        "type": "tf",
+        "name": "G(s)",
+        "domain": null,
+        "Ts": null,
+        "inputs": [
+          {
+            "id": "tf1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "outputs": [
+          {
+            "id": "tf1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null,
+            "tags": {}
+          }
+        ],
+        "params": {
+          "num": [
+            2.0
+          ],
+          "den": [
+            1.0,
+            1.0
+          ]
+        }
+      }
+    ],
+    "wires": [
+      {
+        "id": "w1",
+        "src": "sum_glyph1.y",
+        "dst": "tf1.u",
+        "tags": {}
+      },
+      {
+        "id": "w2",
+        "src": "step1.y",
+        "dst": "sum_glyph1.a",
+        "tags": {}
+      },
+      {
+        "id": "w3",
+        "src": "tf1.y",
+        "dst": "scope1.u",
+        "tags": {}
+      },
+      {
+        "id": "w4",
+        "src": "tf1.y",
+        "dst": "gain_flipped1.u",
+        "tags": {}
+      },
+      {
+        "id": "w5",
+        "src": "gain_flipped1.y",
+        "dst": "sum_glyph1.b",
+        "tags": {}
+      }
+    ],
+    "io_inputs": [
+      "step1.y"
+    ],
+    "io_outputs": [
+      "tf1.y"
+    ]
+  },
+  "ui_session": {
+    "graph": {
+      "layout_direction": 0,
+      "acyclic": false,
+      "pipe_collision": false,
+      "pipe_slicing": true,
+      "pipe_style": 2,
+      "accept_connection_types": "{}",
+      "reject_connection_types": "{}"
+    },
+    "nodes": {
+      "0x12caae7b0": {
+        "type_": "simulator.nodes.SumGlyphNode",
+        "icon": null,
+        "name": "\u03a3",
+        "color": [
+          13,
+          18,
+          23,
+          255
+        ],
+        "border_color": [
+          74,
+          84,
+          85,
+          255
+        ],
+        "text_color": [
+          255,
+          255,
+          255,
+          180
+        ],
+        "disabled": false,
+        "selected": false,
+        "visible": true,
+        "width": 160,
+        "height": 74.2,
+        "pos": [
+          196.04608039463642,
+          286.86968826107807
+        ],
+        "layout_direction": 0,
+        "port_deletion_allowed": false,
+        "subgraph_session": {},
+        "custom": {
+          "block_id": "sum_glyph1",
+          "block_type": "sum_glyph",
+          "params": {
+            "n_inputs": 2,
+            "signs": [
+              1,
+              -1
+            ]
+          }
+        }
+      },
+      "0x12caa5810": {
+        "type_": "simulator.nodes.StepNode",
+        "icon": null,
+        "name": "step",
+        "color": [
+          13,
+          18,
+          23,
+          255
+        ],
+        "border_color": [
+          74,
+          84,
+          85,
+          255
+        ],
+        "text_color": [
+          255,
+          255,
+          255,
+          180
+        ],
+        "disabled": false,
+        "selected": false,
+        "visible": true,
+        "width": 160,
+        "height": 60,
+        "pos": [
+          -43.196593985258914,
+          284.65447831311616
+        ],
+        "layout_direction": 0,
+        "port_deletion_allowed": false,
+        "subgraph_session": {},
+        "custom": {
+          "block_id": "step1",
+          "block_type": "step",
+          "params": {
+            "amplitude": 1.0,
+            "t0": 0.0
+          }
+        }
+      },
+      "0x12caa56d0": {
+        "type_": "simulator.nodes.TFNode",
+        "icon": null,
+        "name": "G(s)",
+        "color": [
+          13,
+          18,
+          23,
+          255
+        ],
+        "border_color": [
+          74,
+          84,
+          85,
+          255
+        ],
+        "text_color": [
+          255,
+          255,
+          255,
+          180
+        ],
+        "disabled": false,
+        "selected": false,
+        "visible": true,
+        "width": 160,
+        "height": 60,
+        "pos": [
+          413.13665529491175,
+          284.6544783131161
+        ],
+        "layout_direction": 0,
+        "port_deletion_allowed": false,
+        "subgraph_session": {},
+        "custom": {
+          "block_id": "tf1",
+          "block_type": "tf",
+          "params": {
+            "den": [
+              1.0,
+              1.0
+            ],
+            "num": [
+              2.0
+            ]
+          }
+        }
+      },
+      "0x12c993360": {
+        "type_": "simulator.nodes.ScopeNode",
+        "icon": null,
+        "name": "scope",
+        "color": [
+          13,
+          18,
+          23,
+          255
+        ],
+        "border_color": [
+          74,
+          84,
+          85,
+          255
+        ],
+        "text_color": [
+          255,
+          255,
+          255,
+          180
+        ],
+        "disabled": false,
+        "selected": false,
+        "visible": true,
+        "width": 160,
+        "height": 60,
+        "pos": [
+          725.481257957553,
+          284.6544783131161
+        ],
+        "layout_direction": 0,
+        "port_deletion_allowed": false,
+        "subgraph_session": {},
+        "custom": {
+          "block_id": "scope1",
+          "block_type": "scope",
+          "params": {
+            "label": ""
+          }
+        }
+      },
+      "0x12c9936f0": {
+        "type_": "simulator.nodes.GainFlippedNode",
+        "icon": null,
+        "name": "K",
+        "color": [
+          13,
+          18,
+          23,
+          255
+        ],
+        "border_color": [
+          74,
+          84,
+          85,
+          255
+        ],
+        "text_color": [
+          255,
+          255,
+          255,
+          180
+        ],
+        "disabled": false,
+        "selected": false,
+        "visible": true,
+        "width": 160,
+        "height": 60,
+        "pos": [
+          413.13665529491186,
+          456.33324928017083
+        ],
+        "layout_direction": 0,
+        "port_deletion_allowed": false,
+        "subgraph_session": {},
+        "custom": {
+          "block_id": "gain_flipped1",
+          "block_type": "gain_flipped",
+          "params": {
+            "k": 2.0
+          }
+        }
+      }
+    },
+    "connections": [
+      {
+        "in": [
+          "0x12caae7b0",
+          "a"
+        ],
+        "out": [
+          "0x12caa5810",
+          "y"
+        ]
+      },
+      {
+        "in": [
+          "0x12caae7b0",
+          "b"
+        ],
+        "out": [
+          "0x12c9936f0",
+          "y"
+        ]
+      },
+      {
+        "out": [
+          "0x12caae7b0",
+          "y"
+        ],
+        "in": [
+          "0x12caa56d0",
+          "u"
+        ]
+      },
+      {
+        "out": [
+          "0x12caa56d0",
+          "y"
+        ],
+        "in": [
+          "0x12c993360",
+          "u"
+        ]
+      },
+      {
+        "out": [
+          "0x12caa56d0",
+          "y"
+        ],
+        "in": [
+          "0x12c9936f0",
+          "u"
+        ]
+      }
+    ]
+  }
+}

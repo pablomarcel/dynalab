@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://machines.local/simulator/ir/schema_v1.json",
+  "title": "Simulator ProjectIR Schema v1",
+  "type": "object",
+  "required": [
+    "meta",
+    "blocks",
+    "wires",
+    "io_inputs",
+    "io_outputs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "domain"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "continuous",
+            "discrete",
+            "hybrid"
+          ]
+        },
+        "Ts": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/block"
+      }
+    },
+    "wires": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/wire"
+      }
+    },
+    "io_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "io_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "dim": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      ]
+    },
+    "port": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "direction",
+        "dim"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "in",
+            "out"
+          ]
+        },
+        "dim": {
+          "$ref": "#/$defs/dim"
+        },
+        "sign": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "enum": [
+            -1,
+            1,
+            null
+          ]
+        },
+        "tags": {
+          "type": "object"
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "inputs",
+        "outputs",
+        "params"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "continuous",
+            "discrete",
+            "hybrid",
+            null
+          ]
+        },
+        "Ts": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/port"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/port"
+          }
+        },
+        "params": {
+          "type": "object"
+        }
+      }
+    },
+    "wire": {
+      "type": "object",
+      "required": [
+        "id",
+        "src",
+        "dst",
+        "tags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "dst": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

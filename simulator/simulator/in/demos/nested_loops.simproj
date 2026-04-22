@@ -1,0 +1,311 @@
+{
+  "format": "simproj",
+  "format_version": 1,
+  "model_ir": {
+    "meta": {
+      "version": 1,
+      "title": "Demo \u2014 Nested Loops",
+      "domain": "continuous",
+      "Ts": null
+    },
+    "blocks": [
+      {
+        "id": "r",
+        "type": "step",
+        "name": "Step",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "amplitude": 1.0,
+          "t0": 0.0
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "r.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "sum1",
+        "type": "sum",
+        "name": "Sum_outer",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "n_inputs": 2,
+          "signs": [
+            1,
+            -1
+          ]
+        },
+        "inputs": [
+          {
+            "id": "sum1.a",
+            "name": "a",
+            "direction": "in",
+            "dim": 1,
+            "sign": 1
+          },
+          {
+            "id": "sum1.b",
+            "name": "b",
+            "direction": "in",
+            "dim": 1,
+            "sign": -1
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sum1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "G1",
+        "type": "tf",
+        "name": "G1(s)",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "num": [
+            1.0
+          ],
+          "den": [
+            1.0,
+            1.0
+          ]
+        },
+        "inputs": [
+          {
+            "id": "G1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "G1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "sum2",
+        "type": "sum",
+        "name": "Sum_inner",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "n_inputs": 2,
+          "signs": [
+            1,
+            -1
+          ]
+        },
+        "inputs": [
+          {
+            "id": "sum2.a",
+            "name": "a",
+            "direction": "in",
+            "dim": 1,
+            "sign": 1
+          },
+          {
+            "id": "sum2.b",
+            "name": "b",
+            "direction": "in",
+            "dim": 1,
+            "sign": -1
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sum2.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "G2",
+        "type": "tf",
+        "name": "G2(s)",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "num": [
+            5.0
+          ],
+          "den": [
+            1.0,
+            5.0
+          ]
+        },
+        "inputs": [
+          {
+            "id": "G2.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "G2.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "H2",
+        "type": "gain",
+        "name": "H2",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "k": 0.5
+        },
+        "inputs": [
+          {
+            "id": "H2.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "H2.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "H1",
+        "type": "gain",
+        "name": "H1",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "k": 1.0
+        },
+        "inputs": [
+          {
+            "id": "H1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": [
+          {
+            "id": "H1.y",
+            "name": "y",
+            "direction": "out",
+            "dim": 1,
+            "sign": null
+          }
+        ]
+      },
+      {
+        "id": "scope1",
+        "type": "scope",
+        "name": "Scope",
+        "domain": null,
+        "Ts": null,
+        "params": {
+          "label": "y"
+        },
+        "inputs": [
+          {
+            "id": "scope1.u",
+            "name": "u",
+            "direction": "in",
+            "dim": 1,
+            "sign": null
+          }
+        ],
+        "outputs": []
+      }
+    ],
+    "wires": [
+      {
+        "id": "w0",
+        "src": "r.y",
+        "dst": "sum1.a"
+      },
+      {
+        "id": "w1",
+        "src": "sum1.y",
+        "dst": "G1.u"
+      },
+      {
+        "id": "w2",
+        "src": "G1.y",
+        "dst": "sum2.a"
+      },
+      {
+        "id": "w3",
+        "src": "sum2.y",
+        "dst": "G2.u"
+      },
+      {
+        "id": "w4",
+        "src": "G2.y",
+        "dst": "scope1.u"
+      },
+      {
+        "id": "w5",
+        "src": "G2.y",
+        "dst": "H2.u"
+      },
+      {
+        "id": "w6",
+        "src": "H2.y",
+        "dst": "sum2.b"
+      },
+      {
+        "id": "w7",
+        "src": "G2.y",
+        "dst": "H1.u"
+      },
+      {
+        "id": "w8",
+        "src": "H1.y",
+        "dst": "sum1.b"
+      }
+    ],
+    "io_inputs": [
+      "r.y"
+    ],
+    "io_outputs": [
+      "G2.y"
+    ]
+  },
+  "ui_session": {}
+}
