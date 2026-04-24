@@ -97,6 +97,20 @@ The current application layout centers around three main work areas:
 
 Analysis results are shown in a separate plot window.
 
+## Screenshots
+
+### Diagram-first control workflow
+
+![DynaLab main workspace](docs/images/ui.png)
+
+DynaLab provides a desktop block-diagram canvas where users can place source blocks, transfer functions, gains, sums, delays, scopes, and terminators, then wire them into feedback-control diagrams.
+
+### Response plots
+
+![DynaLab response plots](docs/images/step.png)
+
+Analysis results are displayed in plot windows, giving the project a lightweight Simulink-style workflow backed by Python control tools.
+
 ---
 
 ## Example workflow
